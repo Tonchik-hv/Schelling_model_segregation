@@ -5,6 +5,14 @@ import copy
 import os
 
 
+def count_neighbours(MAP, row_num, col_num, val):
+    sl0 = np.array(range(row_num-1,row_num+2)).reshape(-1,1)%MAP.shape[0]
+    sl1 = np.array(range(col_num-1,col_num+2)).reshape(1,-1)%MAP.shape[1]
+    neighbourhood = MAP[sl0, sl1]
+    n_neighbours = len(np.where(neighbourhood == val)[0])-1
+    return n_neighbours
+
+
 class Schelling_model:
   def __init__(self, size=100, threshold=0.5, max_iter=50):
     self.size = size
@@ -19,19 +27,12 @@ class Schelling_model:
     plt.imshow(self.init_map, cmap='binary')
     plt.savefig(filename)
 
-  def count_neighbours(self, row_num, col_num, val):
-    sl0 = np.array(range(row_num-1,row_num+2)).reshape(-1,1)%self.map.shape[0]
-    sl1 = np.array(range(col_num-1,col_num+2)).reshape(1,-1)%self.map.shape[1]
-    neighbourhood = self.map[sl0, sl1]
-    n_neighbours = len(np.where(neighbourhood == val)[0])-1
-    return n_neighbours
-
   def one_iter(self):
     market = {}
     dissapointed = []
     number = 0
     for (row, col), val in np.ndenumerate(self.map):
-      n_neighbours = self.count_neighbours(row, col, val)
+      n_neighbours = count_neighbours(self.map, row, col, val)
       if n_neighbours < self.threshold*8:
           market[(row, col)] = number
           dissapointed.append(val)
@@ -47,7 +48,7 @@ class Schelling_model:
     for _ in range(self.max_iter):
       self.one_iter()
 
-  def plot_final_map(self, , filename='result.png'):
+  def plot_final_map(self, filename='result.png'):
     plt.imshow(self.map_history[-1], cmap='binary')
     plt.savefig(filename)
 
