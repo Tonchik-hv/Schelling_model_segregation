@@ -12,6 +12,12 @@
 - After you finished with the whole map - cells that want to move can move into free cells
 - Repeat the whole procedure
 
+## Demostration of the algorithm work
+
+Below the demonstration of how the algorithm works is presented. The threshold value **R** = 0.625:
+
+<img src="Example/0.625.gif" width="400">
+
 ## Quickstart
 
 ## Development
