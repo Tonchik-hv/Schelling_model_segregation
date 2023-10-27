@@ -3,14 +3,21 @@ import random
 import matplotlib.pyplot as plt
 import copy
 import os
+import ctypes
 
 
-def count_neighbours(MAP, row_num, col_num, val):
-    sl0 = np.array(range(row_num-1,row_num+2)).reshape(-1,1)%MAP.shape[0]
-    sl1 = np.array(range(col_num-1,col_num+2)).reshape(1,-1)%MAP.shape[1]
-    neighbourhood = MAP[sl0, sl1]
-    n_neighbours = len(np.where(neighbourhood == val)[0])-1
-    return n_neighbours
+mylib = ctypes.CDLL('./mylib.so')
+# Define the argument types and return type of the function
+mylib.count_neighbours.argtypes = [np.ctypeslib.ndpointer(dtype=np.int32, flags='C_CONTIGUOUS'), ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int]
+mylib.count_neighbours.restype = ctypes.c_int
+
+
+# def count_neighbours(MAP, row_num, col_num, val):
+#     sl0 = np.array(range(row_num-1,row_num+2)).reshape(-1,1)%MAP.shape[0]
+#     sl1 = np.array(range(col_num-1,col_num+2)).reshape(1,-1)%MAP.shape[1]
+#     neighbourhood = MAP[sl0, sl1]
+#     n_neighbours = len(np.where(neighbourhood == val)[0])-1
+#     return n_neighbours
 
 
 class Schelling_model:
@@ -31,8 +38,13 @@ class Schelling_model:
     market = {}
     dissapointed = []
     number = 0
+
+    flattened_map = self.map.flatten().tolist()
+    map_python_array = np.array(flattened_map, dtype=np.int32)
+
     for (row, col), val in np.ndenumerate(self.map):
-      n_neighbours = count_neighbours(self.map, row, col, val)
+      #n_neighbours = count_neighbours(self.map, row, col, val)
+      n_neighbours = mylib.count_neighbours(np.ascontiguousarray(map_python_array, dtype=np.int32), self.size, row, col, val)
       if n_neighbours < self.threshold*8:
           market[(row, col)] = number
           dissapointed.append(val)
