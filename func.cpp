@@ -1,21 +1,8 @@
 #include <vector>
 
-extern "C" int count_neighbours(const int* map_data, int size, int row_num, int col_num, int val) {
-    // Reshape the data into the vector of vectors
-    std::vector<std::vector<int>> MAP;
-    int index = 0;
-    for (int i = 0; i < size; ++i) {
-        std::vector<int> row;
-        for (int j = 0; j < size; ++j) {
-            row.push_back(map_data[index]);
-            ++index;
-        }
-        MAP.push_back(row);
-    }
-
-    // Count neighbours
-    int num_rows = MAP.size();
-    int num_cols = MAP[0].size();
+extern "C" int count_neighbours(const int** MAP, int rows_size, int cols_size, int row_num, int col_num, int val) {
+    int num_rows = rows_size;
+    int num_cols = cols_size;
     int n_neighbours = 0;
 
     for (int i = -1; i <= 1; ++i) {
