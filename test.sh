@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-python3 app/test_source.py
+cd ./app/
+python3 ./test_source.py

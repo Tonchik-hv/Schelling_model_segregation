@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 # Check if the script is run as root
 if [ "$EUID" -ne 0 ]; then
   echo "Please run this script as root or with sudo."
@@ -15,8 +14,8 @@ apt install software-properties-common -y
 add-apt-repository ppa:deadsnakes/ppa
 apt install python3.11 -y
 apt install python3-pip -y
-apt install python3-numpy
-apt install python3-matplotlib
+
+pip install numpy matplotlib --break-system-packages
 
 apt install gcc -y
 
