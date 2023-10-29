@@ -13,7 +13,15 @@ jobs:
 
         run: |
           chmod +x ./prereqs.sh ./test.sh ./build.sh ./run.sh
-          sudo ./prereqs.sh
+          apt update
+
+          apt upgrade -y 
+          apt install software-properties-common -y
+          add-apt-repository ppa:deadsnakes/ppa
+          apt install python3.11 -y
+          apt install python3-pip -y
+          pip install numpy matplotlib
+          
           ./build.sh
           ./test.sh
           ./run.sh
