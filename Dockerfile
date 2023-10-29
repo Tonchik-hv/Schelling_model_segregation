@@ -26,4 +26,5 @@ RUN ./test.sh
 
 FROM test as entry
 
+RUN ./run.sh 16 0.25
 ENTRYPOINT ["bash"]
