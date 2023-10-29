@@ -22,13 +22,36 @@ Below the demonstration of how the algorithm works is presented. The threshold v
 Run 2 scripts, which will install all necessary environment and build the program.
 ```
 git clone https://github.com/Tonchik-hv/Schelling_model_segregation.git
-chmod +x ./prereqs.sh ./test.sh ./build.sh
-sudo ./prereqs.sh
+cd Schelling_model_segregation/
+chmod +x ./prereqs.sh ./test.sh ./build.sh ./run.sh
+./prereqs.sh
 ./build.sh
 ```
-And run the program:
+Test the program
 ```
-python3 test_source.py
+./test.sh
+```
+Run the program
+Define the $1 size of the map and $2 threshold as params (or leave empty for default)
+```
+./run.sh
+
+./run.sh 224 0.20
+```
+## Working inside docker
+To build the project (tests and the default run are included)
+```
+git clone https://github.com/Tonchik-hv/Schelling_model_segregation.git
+cd Schelling_model_segregation/
+docker build -t fse_project_im .
+```
+Run the program with the custom params
+$1 - size of the map
+$2 - threshold
+```
+docker run --rm fse_project_im ./run.sh
+
+docker run --rm fse_project_im ./run.sh 224 0.25
 ```
 ## Development
 
@@ -36,14 +59,14 @@ The decription of the project structure:
 
 - **.github/workflows** - GitHub workflow-based deployment system;
 - **Example/0.625.gif** - Demonstration gif with how the algorithm works for parameter **R** = 0.625;
-- **Makefile** - build system to compile the code;
-- **Schelling_model.ipynb** - demonstration jupyter notebook to show how the mode;l works;
+- **app/Makefile** - build system to compile the code;
+- **app/Schelling_model.ipynb** - demonstration jupyter notebook to show how the mode;l works;
+- **app/func.cpp** - the function for counting the number of neighbours;
+- **app/main.py** - the main python script to start the algorithm work;
+- **app/source.py** - source code for the model;
+- **app/test_source.py** - unit tests for checking the critical functionality of the modules of the project.
+- **Dockerfile** - Dockerfile for building the image
 - **build.sh** - script to build the code;
-- **func.cpp** - the function for counting the number of neighbours;
-- - **install_python.sh** - script for installing Python3 in the Docker container;
-- **main.py** - the main python script to start the algorithm work;
-- **mylib.so** - library for func.cpp;
 - **prereqs.sh** - script to install required libraries;
-- **source.py** - source code for the model;
--  **test.sh** - script to test the implementation;
--  **test_source.py** - unit tests for checking the critical functionality of the modules of the project. 
+- **run.sh** - script to run the implementation;
+- **test.sh** - script to test the implementation;
