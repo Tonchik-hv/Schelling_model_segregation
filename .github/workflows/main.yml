@@ -13,5 +13,6 @@ jobs:
 
         run: |
           chmod +x ./prereqs.sh ./test.sh ./build.sh
+          ./prereqs.sh
           ./build.sh
           ./test.sh
