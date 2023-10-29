@@ -1,15 +1,6 @@
 FROM ubuntu:23.04 as base
 
 RUN apt update
-
-FROM base as dependencies
-
-RUN ./prereqs.sh
-
-FROM dependencies as build
-
-RUN ./build.sh
-
-FROM build as test
-
-RUN ./test.sh
+RUN apt install git -y
+RUN git clone https://github.com/Tonchik-hv/Schelling_model_segregation.git
+RUN cd ./Schelling_model_segregation
