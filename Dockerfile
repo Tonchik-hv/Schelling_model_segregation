@@ -16,12 +16,12 @@ FROM base as dependencies
 RUN ./Schelling_model_segregation/prereqs.sh
 
 FROM dependencies as build
+WORKDIR ./Schelling_model_segregation
 
-RUN ./Schelling_model_segregation/build.sh
+RUN ./build.sh
 
 FROM build as test
 
-WORKDIR ./Schelling_model_segregation
 RUN ./test.sh
 
 FROM test as entry
