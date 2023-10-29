@@ -19,5 +19,15 @@ Below the demonstration of how the algorithm works is presented. The threshold v
 <img src="Example/0.625.gif" width="400">
 
 ## Quickstart
-
+Run 2 scripts, which will install all necessary environment and build the program.
+```
+git clone https://github.com/Tonchik-hv/Schelling_model_segregation.git
+chmod +x ./prereqs.sh ./test.sh ./build.sh
+sudo ./prereqs.sh
+./build.sh
+```
+And run the program:
+```
+python3 test_source.py
+```
 ## Development
