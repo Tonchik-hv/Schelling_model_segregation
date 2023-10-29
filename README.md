@@ -19,5 +19,31 @@ Below the demonstration of how the algorithm works is presented. The threshold v
 <img src="Example/0.625.gif" width="400">
 
 ## Quickstart
-
+Run 2 scripts, which will install all necessary environment and build the program.
+```
+git clone https://github.com/Tonchik-hv/Schelling_model_segregation.git
+chmod +x ./prereqs.sh ./test.sh ./build.sh
+sudo ./prereqs.sh
+./build.sh
+```
+And run the program:
+```
+python3 test_source.py
+```
 ## Development
+
+The decription of the project structure:
+
+- **.github/workflows** - GitHub workflow-based deployment system;
+- **Example/0.625.gif** - Demonstration gif with how the algorithm works for parameter **R** = 0.625;
+- **Makefile** - build system to compile the code;
+- **Schelling_model.ipynb** - demonstration jupyter notebook to show how the mode;l works;
+- **build.sh** - script to build the code;
+- **func.cpp** - the function for counting the number of neighbours;
+- - **install_python.sh** - script for installing Python3 in the Docker container;
+- **main.py** - the main python script to start the algorithm work;
+- **mylib.so** - library for func.cpp;
+- **prereqs.sh** - script to install required libraries;
+- **source.py** - source code for the model;
+-  **test.sh** - script to test the implementation;
+-  **test_source.py** - unit tests for checking the critical functionality of the modules of the project. 
