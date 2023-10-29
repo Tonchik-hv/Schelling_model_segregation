@@ -12,6 +12,6 @@ jobs:
         name: testing
 
         run: |
-          chmod +x ./test.sh ./build.sh
+          chmod +x ./prereqs.sh ./test.sh ./build.sh
           ./build.sh
           ./test.sh
