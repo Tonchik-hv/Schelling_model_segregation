@@ -12,7 +12,8 @@ jobs:
         name: testing
 
         run: |
-          chmod +x ./prereqs.sh ./test.sh ./build.sh
+          chmod +x ./prereqs.sh ./test.sh ./build.sh ./run.sh
           sudo ./prereqs.sh
           ./build.sh
           ./test.sh
+          ./run.sh
