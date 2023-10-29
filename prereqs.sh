@@ -11,11 +11,14 @@ apt update
 
 # Upgrade installed packages (with -y to automatically answer yes to prompts)
 apt upgrade -y 
-
+apt install software-properties-common -y
+add-apt-repository ppa:deadsnakes/ppa
+apt install python3.11 -y
+apt install python3-pip -y
 apt install python3-numpy
 apt install python3-matplotlib
 
-apt install git gcc -y
+apt install gcc -y
 
 # Check if the installation was successful
 if [ $? -eq 0 ]; then
